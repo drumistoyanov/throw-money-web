@@ -61,33 +61,33 @@ export default class BootScene extends Phaser.Scene {
             }
         });
 
-        // Load Bulgarian Lev banknotes from currencies/bgn folder
-        this.load.image('bgn_1', '/assets/images/currencies/bgn/1.png');
-        this.load.image('bgn_5', '/assets/images/currencies/bgn/5.png');
-        this.load.image('bgn_10', '/assets/images/currencies/bgn/10.png');
-        this.load.image('bgn_20', '/assets/images/currencies/bgn/20.png');
-        this.load.image('bgn_50', '/assets/images/currencies/bgn/50.png');
-        this.load.image('bgn_100', '/assets/images/currencies/bgn/100.png');
+        // Load Bulgarian Lev banknotes from currencies/bgn folder (relative paths)
+        this.load.image('bgn_1', 'assets/images/currencies/bgn/1.png');
+        this.load.image('bgn_5', 'assets/images/currencies/bgn/5.png');
+        this.load.image('bgn_10', 'assets/images/currencies/bgn/10.png');
+        this.load.image('bgn_20', 'assets/images/currencies/bgn/20.png');
+        this.load.image('bgn_50', 'assets/images/currencies/bgn/50.png');
+        this.load.image('bgn_100', 'assets/images/currencies/bgn/100.png');
 
-        // Load Euro banknotes from currencies/eur folder
-        this.load.image('eur_5', '/assets/images/currencies/eur/5.png');
-        this.load.image('eur_10', '/assets/images/currencies/eur/10.png');
-        this.load.image('eur_20', '/assets/images/currencies/eur/20.png');
-        this.load.image('eur_50', '/assets/images/currencies/eur/50.png');
-        this.load.image('eur_100', '/assets/images/currencies/eur/100.png');
-        this.load.image('eur_200', '/assets/images/currencies/eur/200.png');
-        this.load.image('eur_500', '/assets/images/currencies/eur/500.png');
+        // Load Euro banknotes from currencies/eur folder (relative paths)
+        this.load.image('eur_5', 'assets/images/currencies/eur/5.png');
+        this.load.image('eur_10', 'assets/images/currencies/eur/10.png');
+        this.load.image('eur_20', 'assets/images/currencies/eur/20.png');
+        this.load.image('eur_50', 'assets/images/currencies/eur/50.png');
+        this.load.image('eur_100', 'assets/images/currencies/eur/100.png');
+        this.load.image('eur_200', 'assets/images/currencies/eur/200.png');
+        this.load.image('eur_500', 'assets/images/currencies/eur/500.png');
 
-        // Load audio - throw sound
-        this.load.audio('throwSound', '/assets/sounds/click.mp3');
+        // Load audio - throw sound (relative path)
+        this.load.audio('throwSound', 'assets/sounds/click.mp3');
 
-        // Load all 6 music tracks
-        this.load.audio('bgMusic', '/assets/sounds/song1.mp3');
-        this.load.audio('bgMusic2', '/assets/sounds/song2.mp3');
-        this.load.audio('bgMusic3', '/assets/sounds/song3.mp3');
-        this.load.audio('bgMusic4', '/assets/sounds/song4.mp3');
-        this.load.audio('bgMusic5', '/assets/sounds/song5.mp3');
-        this.load.audio('bgMusic6', '/assets/sounds/song6.mp3');
+        // Load all 6 music tracks (relative paths)
+        this.load.audio('bgMusic', 'assets/sounds/song1.mp3');
+        this.load.audio('bgMusic2', 'assets/sounds/song2.mp3');
+        this.load.audio('bgMusic3', 'assets/sounds/song3.mp3');
+        this.load.audio('bgMusic4', 'assets/sounds/song4.mp3');
+        this.load.audio('bgMusic5', 'assets/sounds/song5.mp3');
+        this.load.audio('bgMusic6', 'assets/sounds/song6.mp3');
     }
 
     create() {

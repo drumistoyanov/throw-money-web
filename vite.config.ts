@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/throw-money-web/', // Replace with your repo name
+  base: '/throw-money-web/', // Add trailing slash
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

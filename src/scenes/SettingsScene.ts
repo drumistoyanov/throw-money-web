@@ -166,17 +166,8 @@ export default class SettingsScene extends Phaser.Scene {
       this.selectedMusic = id as 'song1' | 'song2' | 'song3' | 'song4' | 'song5' | 'song6';
       this.updateMusicSelection();
       
-      // Preview the music
+      // Stop all sounds to prevent any music from playing
       this.sound.stopAll();
-      const musicKey = `bgMusic${id === 'song1' ? '' : id.substring(4)}`;
-      const preview = this.sound.add(musicKey, {
-        volume: 0.3
-      });
-      preview.play();
-      
-      this.time.delayedCall(3000, () => {
-        preview.stop();
-      });
     });
 
     container.on('pointerover', () => {

@@ -38,9 +38,9 @@ export default class GameScene extends Phaser.Scene {
     this.isMusicPlaying = false;
     this.isPaused = false;
 
-    // 🔊 Create sound instances ONCE
+    // 🔊 Create sound instances ONCE with reduced volume
     this.throwSound = this.sound.add('throwSound', {
-      volume: 0.6
+      volume: 0.2  // Reduced from 0.6 to 0.2
     });
 
     // 🎵 Background music with loop - use selected track (song1-song6)
@@ -144,11 +144,11 @@ export default class GameScene extends Phaser.Scene {
       .setDepth(1000);
 
     // Pause icon (two vertical bars)
-    const pauseIcon1 = this.add.rectangle(x - 36, y + 30, 6, 20, 0xFFFFFF)
+    this.add.rectangle(x - 36, y + 30, 6, 20, 0xFFFFFF)
       .setScrollFactor(0)
       .setDepth(1001);
     
-    const pauseIcon2 = this.add.rectangle(x - 24, y + 30, 6, 20, 0xFFFFFF)
+    this.add.rectangle(x - 24, y + 30, 6, 20, 0xFFFFFF)
       .setScrollFactor(0)
       .setDepth(1001);
 
@@ -308,10 +308,10 @@ export default class GameScene extends Phaser.Scene {
     restartButton.on('pointerout', () => {
       restartButton.setFillStyle(0xFFD700);
       restartButton.setScale(1);
-    });
+    }); 
 
     restartButton.on('pointerdown', () => {
-      // Clean up timers
+      // Clean up timers first
       if (this.musicStopTimer) {
         this.musicStopTimer.remove();
         this.musicStopTimer = undefined;
@@ -321,7 +321,16 @@ export default class GameScene extends Phaser.Scene {
         this.comboResetTimer = undefined;
       }
       
-      // Stop all sounds
+      // Stop and destroy music explicitly
+      if (this.bgMusic) {
+        this.bgMusic.stop();
+        this.bgMusic.destroy();
+      }
+      if (this.throwSound) {
+        this.throwSound.stop();
+      }
+      
+      // Stop all remaining sounds
       this.sound.stopAll();
       
       // Reset state
@@ -370,7 +379,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     quitButton.on('pointerdown', () => {
-      // Clean up timers
+      // Clean up timers first
       if (this.musicStopTimer) {
         this.musicStopTimer.remove();
         this.musicStopTimer = undefined;
@@ -380,7 +389,16 @@ export default class GameScene extends Phaser.Scene {
         this.comboResetTimer = undefined;
       }
       
-      // Stop all sounds
+      // Stop and destroy music explicitly
+      if (this.bgMusic) {
+        this.bgMusic.stop();
+        this.bgMusic.destroy();
+      }
+      if (this.throwSound) {
+        this.throwSound.stop();
+      }
+      
+      // Stop all remaining sounds
       this.sound.stopAll();
       
       // Reset state
@@ -511,10 +529,19 @@ export default class GameScene extends Phaser.Scene {
       this.comboResetTimer = undefined;
     }
 
-    // Stop all sounds
+    // Stop and destroy music explicitly
+    if (this.bgMusic) {
+      this.bgMusic.stop();
+      this.bgMusic.destroy();
+    }
+    if (this.throwSound) {
+      this.throwSound.stop();
+    }
+    
+    // Stop all remaining sounds
     this.sound.stopAll();
     
-    // 🎵 Music already stopped (song completed)
+    // Reset music state
     this.isMusicPlaying = false;
 
     // Go to game over scene
@@ -522,7 +549,19 @@ export default class GameScene extends Phaser.Scene {
   }
 
   shutdown() {
-    // Clean up when scene is shutdown
+    // Stop and destroy music explicitly
+    if (this.bgMusic) {
+      this.bgMusic.stop();
+      this.bgMusic.destroy();
+    }
+    if (this.throwSound) {
+      this.throwSound.stop();
+    }
+    
+    // Stop all remaining sounds
+    this.sound.stopAll();
+    
+    // Clean up timers when scene is shutdown
     if (this.musicStopTimer) {
       this.musicStopTimer.remove();
       this.musicStopTimer = undefined;
@@ -532,8 +571,9 @@ export default class GameScene extends Phaser.Scene {
       this.comboResetTimer = undefined;
     }
     
-    // Stop all sounds
-    this.sound.stopAll();
+    // Reset music state
+    this.isMusicPlaying = false;
+    this.isPaused = false;
   }
 
   update() {
